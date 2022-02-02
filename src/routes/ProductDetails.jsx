@@ -1,17 +1,18 @@
 import React,{useState, useEffect} from 'react';
-import { useParams } from 'react-router-dom';
 import { getSelectedProducts } from '../api/allAPIs';
 import { rateFormatter } from '../api/RateFormatter';
+import { useGlobal } from '../context/Context';
 
 const ProductDetails = ({selectedProduct}) => {
-// let urlParam = useParams()
-// console.log(urlParam.id)
+  
+const {onAdd} = useGlobal()
 
 const [choosenProduct, setChoosenProduct] = useState([])
 useEffect(()=>{
   getSelectedProducts(selectedProduct)
   .then(result => setChoosenProduct(result))
 },[selectedProduct])
+
 
 
 const value = choosenProduct?.rating?.rate == 'undefined'?choosenProduct?.rating?.rate:choosenProduct?.rating?.rate
@@ -37,11 +38,11 @@ const starRatingValue = 0.82*value
             <p className='desc'>{choosenProduct.description}</p>
             <div className="price-rate">
             <p> <span>₹</span>{rateFormatter(choosenProduct.price) } </p>
-              <button>Add to Cart</button>
+              <button onClick={()=>onAdd(choosenProduct)} >Add to Cart</button>
             </div>
           </div>
-      
     </div>
+
   );
 };
 

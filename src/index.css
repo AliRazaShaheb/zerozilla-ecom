@@ -31,8 +31,8 @@ nav .icons{
   align-items: center;
 }
 nav .icons .iconbg{
-  width: 35px;
-  height: 35px;
+  width: 2.5rem;
+  height: 2.5rem;
   background-color: aliceblue;
   display: flex;
   justify-content: center;
@@ -53,8 +53,8 @@ nav .icons .iconbg:hover{
   width: 1rem;
   height: 1rem;
   z-index: 100;
-  right: -0.3rem;
-  top: -0.3rem;
+  right: 0;
+  top: 0;
   border-radius: 50%;
   color: aliceblue;
   font-size: 0.8rem;
@@ -64,8 +64,6 @@ nav .icons .iconbg:hover{
   text-align: center;
   font-weight: bold;
 }
-
-
 
 section{
   display: flex;
@@ -151,7 +149,6 @@ section .categories-container .item.active{
 .pc-container{
   width: 15rem;
   height: 18rem;
-  cursor: pointer;
   transition: all 0.3s;
   padding: 0.5rem;
   border: 1px solid rgba(0, 0, 0, 0.5);
@@ -297,6 +294,12 @@ section .category-title{
 .pd-links{
   text-decoration: none;
   color: black;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .product-details{
@@ -465,6 +468,7 @@ section .category-title{
 
 .cart-total .left p:last-child{
   font-size: 1.1rem;
+  color: rgba(0, 0, 0, 1);
 }
 
 .cart-total .right{
@@ -503,6 +507,11 @@ section .category-title{
   box-shadow: -1rem 1.1rem 2rem rgba(0, 0, 0, 0.2);
   transform: translate(0.6rem,-0.3rem) scale(1.05);
 }
+.checkout .btn-disable{
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
 
 /* mobile */
 
@@ -544,6 +553,7 @@ section .category-title{
   grid-column: 2/span 3;
   }
 }
+
 @media screen and (max-width: 530px) { 
   .product-details{
     flex-direction: column;

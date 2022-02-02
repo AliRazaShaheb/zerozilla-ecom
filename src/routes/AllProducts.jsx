@@ -9,14 +9,11 @@ export const AllProducts = () => {
     const {allProducts} = useGlobal()
 
   return (
-    <>
     <div className='product-container' >
         {allProducts.map((item)=>(
           <ProductCard key={item.id} item={item} />
         ))}
     </div>
-      <Outlet />
-    </>
     
     );
 };

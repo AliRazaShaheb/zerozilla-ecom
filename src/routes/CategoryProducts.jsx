@@ -22,7 +22,6 @@ const CategoryProducts = () => {
             <ProductCard key={item.id} item={item} />
           ))}
         </div>
-          <Outlet />
       </>
     );
   };

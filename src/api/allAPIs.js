@@ -6,12 +6,14 @@ export const getAllCategories = async () => {
                             .then(json=>json)
 };
 
+
 //products from single category [single category]
 export const getProductsByCategory = async (selectedCategory) => {
     return fetch(`https://fakestoreapi.com/products/category/${selectedCategory}`)
             .then(res=>res.json())
             .then(json=>json)
 };
+
 
 // all products
 

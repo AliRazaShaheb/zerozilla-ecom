@@ -12,6 +12,7 @@ const Categories = () => {
     setSelectedCategory(obj)
     setShowAllProducts(false)
   }
+  
   const showAll = ()=>{
     setrouteAllProducts(true)
     setShowAllProducts(false)

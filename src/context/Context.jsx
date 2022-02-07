@@ -9,19 +9,20 @@ export function useGlobal(){
 }
 
 export const ContextProvider = ({children})=>{
-    const [category, setCategory] = useState([])
+    const [{isCategoryLoad,category}, setCategory] = useState({category:[],isCategoryLoad:false})
     const [selectedCategory, setSelectedCategory] = useState([])
     const [selectedProduct, setSelectedProduct] = useState([])
     const [showProducts, setShowProducts] = useState(false)
-    const [allProducts, setAllProducts] = useState([])
+    const [{isLoad,allProducts}, setAllProducts] = useState({isLoaded:false, allProducts:[]})
     const [routeAllProducts, setrouteAllProducts] = useState(false)
     const [showAllProducts, setShowAllProducts] = useState(false)
-    const [subTotal, setSubTotal] = useState(0)
     const [cartItem, setCartItem] = useState([])
+    const [localStorageCartItem, setLocalStorageCartItem] = useState([])
+    const [productLoader, setProductLoader] = useState(false)
+    
 
     const onAdd = (obj)=>{
         let exist = cartItem.find((item)=> item.id === obj.id)
-
         if(exist){
             setCartItem(
             cartItem.map((item)=> item.id === obj.id ? {...exist, qty:exist.qty + 1} :item)
@@ -33,7 +34,6 @@ export const ContextProvider = ({children})=>{
    
     const onRemove = (obj)=>{
         let exist = cartItem.find((item)=> item.id === obj.id)
-        
         
         setCartItem(
             cartItem.map((item)=>(
@@ -48,27 +48,33 @@ export const ContextProvider = ({children})=>{
     }
 
     useEffect(() => {
-        getAllCategories().then((item=>(
-            setCategory(item)
-        )))
-        getAllProducts().then(result => setAllProducts(result))
+        getAllCategories().then(item=>setCategory({
+                category:item,
+                isCategoryLoad:true
+        }))
+        getAllProducts().then(result => setAllProducts({
+            allProducts:result,
+            isLoad:true
+        }))
         
+
       }, []);
 
 
 
     return (
         <context.Provider value={{
-            category,setCategory,
+            isCategoryLoad,category,setCategory,
             selectedCategory,setSelectedCategory,
             selectedProduct,setSelectedProduct,
             showProducts,setShowProducts,
-            allProducts, setAllProducts,
+            isLoad,allProducts, setAllProducts,
             routeAllProducts, setrouteAllProducts,
             showAllProducts, setShowAllProducts,
-            subTotal, setSubTotal,
             cartItem, setCartItem,
-            onAdd,onRemove,removeBtn
+            productLoader, setProductLoader,
+            onAdd,onRemove,removeBtn,
+            localStorageCartItem, setLocalStorageCartItem
 
         }}>
             {children}

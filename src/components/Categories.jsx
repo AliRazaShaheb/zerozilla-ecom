@@ -1,10 +1,11 @@
+import Skeleton from "react-loading-skeleton";
 import { NavLink } from "react-router-dom";
 import { useGlobal } from "../context/Context";
 
 
 const Categories = () => { 
 
-   const{category,setShowProducts, setSelectedCategory,
+   const{isCategoryLoad,category,setShowProducts, setSelectedCategory,
      setShowAllProducts, showAllProducts, setrouteAllProducts} = useGlobal()
 
   const getCategoryName = (obj)=>{
@@ -12,7 +13,7 @@ const Categories = () => {
     setSelectedCategory(obj)
     setShowAllProducts(false)
   }
-  
+
   const showAll = ()=>{
     setrouteAllProducts(true)
     setShowAllProducts(false)
@@ -20,14 +21,14 @@ const Categories = () => {
 
   return (
     <div className='categories-container' >
-      <NavLink to={`/products`} className={({isActive})=>isActive || showAllProducts ? "category-links item active" : "category-links item"} key="All" >
-        <div onClick={showAll} >All</div>
+      <NavLink to={`/products`} className={({isActive})=>isActive || showAllProducts ? "category-links item active" : "category-links item"} key="All" onClick={()=>showAll()}>
+        <div >All</div>
       </NavLink>
-        {category.map((item)=>(
-          <NavLink to={`${item}`.replace(" ","-")} className={({isActive})=>isActive ? "category-links item active" : "category-links item"} key={item} >
-              <div onClick={()=>getCategoryName(item)} >{item}</div>
+        {isCategoryLoad?category.map((item)=>(
+          <NavLink to={`${item}`.replace(" ","-")} className={({isActive})=>isActive ? "category-links item active" : "category-links item"} key={item} onClick={()=>getCategoryName(item)}>
+              <div>{item}</div>
           </NavLink>
-          ))}
+          )): [...Array(4)].map((_,idx)=>(<Skeleton style={{width:"6rem", lineHeight:"2"}} key={idx}/>))}
     </div>
   );
 };

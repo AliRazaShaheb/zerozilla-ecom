@@ -1,26 +1,19 @@
 import React,{useState} from 'react';
+import { Link } from 'react-router-dom';
 import { rateFormatter } from '../api/RateFormatter';
 import { CartItem } from '../components/CartItem';
+import CheckOut from '../components/CheckOut';
 import { useGlobal } from '../context/Context';
 
 
 
 const Cart = () => {
+  const[showCheckout, setShowCheckout] = useState(false)
   
-  const {subTotal, cartItem} = useGlobal()
+  const {cartItem} = useGlobal()
+ 
   
   
-  // const qty_increment = ()=>{
-  //   setCount((prev)=>{
-  //       return prev+1
-  //   })
-  // }
-  // const qty_decrement = ()=>{
-  //     setCount((prev)=>{
-  //         if(prev==1) return 1
-  //         return prev-1
-  //     })
-  // }
   const itemPrice = cartItem.reduce((a,c)=>(a+c.price*c.qty),0)
   
 
@@ -31,7 +24,7 @@ const Cart = () => {
 
   return (
     <>
-      <h1>Cart</h1>
+      <h1>{showCheckout ? "Checkout" :"Cart"}</h1>
       <div className='cart'>
         <div className='cart-header'>
           <div className='cart-image'>
@@ -79,9 +72,13 @@ const Cart = () => {
           <p> <span>₹</span>{rateFormatter(total) } </p>
         </div>
       </div>
-      <div className="checkout">
-        <button className={cartItem.length===0 ? "btn-disable":"" }>Checkout</button>
-      </div>
+      <Link to="checkout" className='cart-links checkout1'>
+        <button className={cartItem.length===0 ? "btn-disable":"" } 
+        onClick={()=>setShowCheckout(true)} >Checkout</button>
+      </Link>
+
+      
+      
     </>
   );
 };

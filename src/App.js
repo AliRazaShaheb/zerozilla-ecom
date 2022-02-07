@@ -11,14 +11,15 @@ import ProfilePage from './routes/ProfilePage';
 import CategoryProducts from "./routes/CategoryProducts";
 import { useGlobal } from "./context/Context";
 import { AllProducts } from "./routes/AllProducts";
+import CheckOut from './components/CheckOut';
+
 
 function App() {
     
   const {showProducts, selectedCategory, selectedProduct, routeAllProducts} = useGlobal()
   
-  
   return (
-    <div className="App">
+    <div className="App" >
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} >
@@ -33,19 +34,19 @@ function App() {
 
               <Route path="products/:id" element={<ProductDetails selectedProduct={selectedProduct} />} />
                 
-              {showProducts && (
-              <Route path={`${selectedCategory}`.replace(" ","-")} element={
+              {showProducts && <Route path={`${selectedCategory}`.replace(" ","-")} element={
                 <section>
                   <h3 className="category-title">{`${selectedCategory} Products`}</h3>
                   <CategoryProducts  />
                 </section> } >
                 </Route>
-                )}
+                }
               
               <Route path={`${selectedCategory}/:id`.replace(" ","-")} element={<ProductDetails selectedProduct={selectedProduct} />} />
               
 
               <Route path="cart" element={<section><Cart /></section>} />
+              <Route path="cart/checkout" element={<section><CheckOut /></section>} />
 
               <Route path="profile-page" element={<ProfilePage />} />
 

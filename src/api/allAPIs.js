@@ -1,6 +1,8 @@
 
+
+
 //all categories
-export const getAllCategories = async () => {
+export const getAllCategories = () => {
     return fetch('https://fakestoreapi.com/products/categories')
                             .then(res=>res.json())
                             .then(json=>json)
@@ -8,7 +10,7 @@ export const getAllCategories = async () => {
 
 
 //products from single category [single category]
-export const getProductsByCategory = async (selectedCategory) => {
+export const getProductsByCategory = (selectedCategory) => {
     return fetch(`https://fakestoreapi.com/products/category/${selectedCategory}`)
             .then(res=>res.json())
             .then(json=>json)
@@ -17,7 +19,8 @@ export const getProductsByCategory = async (selectedCategory) => {
 
 // all products
 
-export const getAllProducts = async () => {
+export const getAllProducts =  () => {
+
     return fetch('https://fakestoreapi.com/products')
                             .then(res=>res.json())
                             .then(json=>json)
@@ -25,8 +28,9 @@ export const getAllProducts = async () => {
 
 
 // selected product [single product]
-export const getSelectedProducts = async (pid) => {
-    return fetch(`https://fakestoreapi.com/products/${pid}`)
+export const getSelectedProducts =  (pid) => {
+    
+    return  fetch(`https://fakestoreapi.com/products/${pid}`)
                             .then(res=>res.json())
                             .then(json=>json)
 };

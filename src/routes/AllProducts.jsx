@@ -1,18 +1,23 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import PcSkletonLoader from '../components/PcSkletonLoader';
+
 import ProductCard from '../components/ProductCard';
 import { useGlobal } from '../context/Context';
 
 
+
 export const AllProducts = () => {
 
-    const {allProducts} = useGlobal()
+  const {isLoad,allProducts} = useGlobal()
+  
+  
+
 
   return (
     <div className='product-container' >
-        {allProducts.map((item)=>(
+        {isLoad ? allProducts.map((item)=>(
           <ProductCard key={item.id} item={item} />
-        ))}
+        )): [...Array(10)].map((_,idx)=><PcSkletonLoader key={idx}/>)}
     </div>
     
     );

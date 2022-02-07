@@ -15,10 +15,10 @@ const ProductCard = ({item}) => {
     
   }
  
-
+  
 
   return (
-    <div className='pc-container'>
+      <div className= 'pc-container'>
       <Link to={`${item.id}`.replace(" ","-")} className='pd-links' onClick={getProductId}>
         <div className="img-container">
             <img src={item.image} alt={item.title} />

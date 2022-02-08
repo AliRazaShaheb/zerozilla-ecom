@@ -401,10 +401,8 @@ section .category-title{
 .title{
   width: 70%;
 }
-select, option{
-  height: 2rem;
-  outline: none;
-  border-radius: 0.3rem;
+form{
+  width: 100%;
 }
 ::-webkit-scrollbar{
   width: 0.5rem;

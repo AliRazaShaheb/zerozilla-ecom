@@ -1,12 +1,13 @@
 import React from 'react';
 
 const Input = (props) => {
-    const {id, className, type,label, error} = props
-
+    const {className, setFormValues, formValues,     id, label, name, type, error} = props
   return <div className={className}>
       <label htmlFor={id}>{label}</label>
       <div>
-        <input type={type} id={id} name={id}/>
+        <input type={type} id={id} name={name} required
+          onChange={(e)=>setFormValues({...formValues,[e.target.name]:e.target.value})}
+        />
         <p style={{
           fontSize:"0.5rem", 
           fontWeight:"bold", 

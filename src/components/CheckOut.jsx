@@ -50,12 +50,28 @@ const customStyles = {
 };
 
 const CheckOut = () => {  
+const [formValues, setFormValues] = useState({
+    name:'',
+    email:'',
+    mobile:'',
+    shippingAddress:'',
+    nameOnCard:'',
+    cardNum:'',
+    expDate:'',
+    cvv:'',
+    chooseYourBank:'',
+    upinum:'',
+    remarks:''
+})
 const navigate = useNavigate()
 const {setCartItem} = useGlobal()
 const [divActive, setDivActive] = useState(1);
 const [modalIsOpen, setModalIsOpen] = useState(false)
 
-function openModal() {
+console.log(formValues)
+
+
+const openModal = ()=> {
     setModalIsOpen(true);
     setTimeout(()=>{
         setModalIsOpen(false);
@@ -66,7 +82,7 @@ function openModal() {
   }
    
 
-function closeModal() {
+const closeModal = ()=> {
     setModalIsOpen(false);
   }
 
@@ -75,18 +91,21 @@ const activeDiv = (id)=>{
 }
 
 
-  return <div className='checkout'>
+  return <form>
+    <div className='checkout'>
         <div className="title">
             <h3>Billing Details</h3>
         </div>
         <div className="billing-details">
             {billingInputFeilds.map((inputF)=>(
-                <Input className="name" key={inputF.id} {...inputF} />
+                <Input className="name" key={inputF.id} {...inputF} 
+                setFormValues = {setFormValues} formValues={formValues} 
+                />
             ))}
             
             <div className="address">
                 <label htmlFor="address">Shipping Address:</label>
-                <textarea id="address" name="address" rows={5} cols={50} maxLength={100} required/>
+                <textarea id="address" name="shippingAddress" rows={5} cols={50} maxLength={100} required onChange={(e)=>setFormValues({...formValues, shippingAddress:e.target.value})}/>
             </div>
 
         </div>
@@ -132,9 +151,25 @@ const activeDiv = (id)=>{
             </div>
         </div>
         <div className="payment-details" >
-            {divActive === 1 | divActive === 2 ? <DebitCreditCard />:null}
-            {divActive===3 ? <NetBanking /> : null}
-            {divActive === 4 ? <Upi /> : null}
+            {divActive === 1 | divActive === 2 
+                            ? <DebitCreditCard 
+                                setFormValues = {setFormValues} formValues=
+                                {formValues} 
+                                />
+                            
+                            :null}
+            {divActive===3 
+                            ? <NetBanking 
+                                setFormValues = {setFormValues} formValues=
+                                {formValues} 
+                                /> 
+                            : null}
+            {divActive === 4 
+                            ? <Upi 
+                                setFormValues = {setFormValues} formValues=
+                                {formValues}
+                                /> 
+                            : null}
         </div>
         <div className="checkout-btn">
             <button type='submit' onClick={openModal}> Make Payment</button>
@@ -150,7 +185,7 @@ const activeDiv = (id)=>{
       </Modal>
         
     </div>
-  
+    </form>
 };
 
 export default CheckOut;

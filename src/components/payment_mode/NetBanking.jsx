@@ -49,7 +49,7 @@ const customStyles = {
 }
 
 
-const NetBanking = () => {
+const NetBanking = ({setFormValues, formValues}) => {
   const [selectedOption, setSelectedOption] = useState(null);
   
   return <div className='name'>
@@ -61,6 +61,7 @@ const NetBanking = () => {
         options={bankList}
         maxMenuHeight={150}
         placeholder="Select Bank"
+        onInputChange={(inputValue)=>setFormValues({...formValues,chooseYourBank:inputValue})}
       />
         
   </div>;

@@ -2,7 +2,6 @@ import React,{useState} from 'react';
 import { Link } from 'react-router-dom';
 import { rateFormatter } from '../api/RateFormatter';
 import { CartItem } from '../components/CartItem';
-import CheckOut from '../components/CheckOut';
 import { useGlobal } from '../context/Context';
 
 
